@@ -1,11 +1,18 @@
-module.exports = roomsHandler
+module.exports = handler
 
-function roomsHandler () {
-  let io
+function handler () {
+  let documents = {}
+
+  let io, mongoose
+
   return {init}
 
-  function init (_io, express) {
+  function init (_io, express, _mongoose) {
     io = _io
+    mongoose = _mongoose
+
+    mongoose.connect('mongodb://localhost/code2')
+
     io.on('connection', onConnet)
     express.use(expressConfigs)
     express.disable('x-powered-by')
